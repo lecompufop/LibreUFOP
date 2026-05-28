@@ -1,1062 +1,1748 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LibreUFOP – Software Livre, Formação e Integração com a Comunidade</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --red: #C0392B;
-    --red-dark: #922B21;
-    --red-light: #E74C3C;
-    --gray-dark: #2C2C2C;
-    --gray-mid: #5A5A5A;
-    --gray-light: #EFEFEF;
-    --white: #FFFFFF;
-    --off-white: #F8F6F4;
-    --accent: #D4AF37;
-    --text: #1A1A1A;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--red);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 clamp(1.5rem, 5vw, 4rem);
-    height: 64px;
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.3rem;
-    color: var(--red);
-    letter-spacing: -0.02em;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .nav-logo span { color: var(--gray-dark); }
-  nav ul {
-    display: flex; gap: 2rem; list-style: none;
-  }
-  nav a {
-    text-decoration: none; color: var(--gray-mid);
-    font-size: 0.9rem; font-weight: 500;
-    transition: color 0.2s;
-    position: relative;
-  }
-  nav a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 2px; background: var(--red);
-    transition: width 0.25s;
-  }
-  nav a:hover { color: var(--red); }
-  nav a:hover::after { width: 100%; }
-  .nav-cta {
-    background: var(--red); color: var(--white) !important;
-    padding: 0.45rem 1.2rem; border-radius: 4px;
-    font-weight: 600 !important;
-  }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: var(--red-dark) !important; }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100svh;
-    background: var(--gray-dark);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 5.5rem clamp(1.25rem, 6vw, 6rem) 4rem;
-    gap: 3rem;
-  }
-
-  .hero-bg-grid {
-    position: absolute; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(rgba(192,57,43,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(192,57,43,0.08) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .hero-bg-circle {
-    position: absolute;
-    right: -10%; top: -15%;
-    width: 65vw; height: 65vw;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(192,57,43,0.22) 0%, transparent 70%);
-    z-index: 0;
-  }
-  .hero-bg-line {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 3px; background: linear-gradient(90deg, var(--red), transparent);
-    z-index: 1;
-  }
-
-  .hero-content { position: relative; z-index: 2; }
-
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(192,57,43,0.15);
-    border: 1px solid rgba(192,57,43,0.4);
-    color: #FF6B5B;
-    font-size: clamp(0.65rem, 2vw, 0.78rem); font-weight: 600;
-    letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 0.35rem 0.85rem; border-radius: 100px;
-    margin-bottom: 1.2rem;
-    animation: fadeUp 0.6s ease both;
-    max-width: 100%;
-  }
-  .hero-eyebrow::before {
-    content: ''; flex-shrink: 0; width: 6px; height: 6px;
-    background: var(--red-light); border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:0.4; transform:scale(1.5); }
-  }
-
-  .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.8rem, 11vw, 7rem);
-    line-height: 0.95;
-    color: var(--white);
-    letter-spacing: -0.03em;
-    margin-bottom: 0.4rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  .hero-title em {
-    color: var(--red-light);
-    font-style: normal;
-  }
-
-  .hero-slogan {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(0.85rem, 3.5vw, 1.4rem);
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(0.92rem, 2.5vw, 1.15rem);
-    color: rgba(255,255,255,0.65);
-    line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  .hero-actions {
-    display: flex; gap: 0.75rem; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-  .btn-primary {
-    background: var(--red);
-    color: var(--white);
-    padding: 0.8rem 1.5rem;
-    border: none; border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.85rem, 2.5vw, 0.95rem); font-weight: 600;
-    cursor: pointer; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    transition: all 0.25s;
-    box-shadow: 0 4px 20px rgba(192,57,43,0.4);
-    white-space: nowrap;
-  }
-  .btn-primary:hover {
-    background: var(--red-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(192,57,43,0.5);
-  }
-  .btn-secondary {
-    background: transparent;
-    color: rgba(255,255,255,0.8);
-    padding: 0.8rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(0.85rem, 2.5vw, 0.95rem); font-weight: 500;
-    cursor: pointer; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    transition: all 0.25s;
-    white-space: nowrap;
-  }
-  .btn-secondary:hover {
-    border-color: rgba(255,255,255,0.5);
-    color: var(--white);
-    background: rgba(255,255,255,0.06);
-  }
-
-  .hero-visual {
-    position: relative; z-index: 2;
-    display: flex; justify-content: center; align-items: center;
-    animation: fadeUp 0.6s 0.25s ease both;
-  }
-  .hero-badge-stack {
-    position: relative;
-    width: clamp(180px, 36vw, 440px);
-    aspect-ratio: 1;
-  }
-  .hero-badge-main {
-    position: absolute; inset: 0;
-    border: 2px solid rgba(192,57,43,0.3);
-    border-radius: 50%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    padding: 1.5rem;
-    background: radial-gradient(circle at 30% 40%, rgba(192,57,43,0.12), rgba(0,0,0,0));
-  }
-  .hero-badge-ring {
-    position: absolute; inset: -16px;
-    border: 1px dashed rgba(192,57,43,0.2);
-    border-radius: 50%;
-    animation: spin 24s linear infinite;
-  }
-  .hero-badge-ring2 {
-    position: absolute; inset: -40px;
-    border: 1px dashed rgba(192,57,43,0.1);
-    border-radius: 50%;
-    animation: spin 40s linear infinite reverse;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .hero-icon-gnu {
-    font-size: clamp(2rem, 6vw, 5rem); line-height: 1;
-    margin-bottom: 0.6rem;
-  }
-  .hero-badge-text {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1rem, 3vw, 2.8rem);
-    font-weight: 800; color: var(--white);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .hero-badge-sub {
-    font-size: clamp(0.55rem, 1vw, 0.8rem); color: rgba(255,255,255,0.45);
-    margin-top: 0.35rem; letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .hero-dot {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--red-light);
-    opacity: 0.7;
-  }
-  .hero-dot-1 { width:10px; height:10px; top:8%; right:22%; animation: floatDot 4s 0s ease-in-out infinite; }
-  .hero-dot-2 { width:6px; height:6px; bottom:12%; left:15%; animation: floatDot 5s 1s ease-in-out infinite; }
-  .hero-dot-3 { width:14px; height:14px; top:40%; right:5%; background: var(--accent); animation: floatDot 3.5s 0.5s ease-in-out infinite; }
-  @keyframes floatDot {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-
-  /* ── SECTION BASE ── */
-  section { padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 6vw, 6rem); }
-
-  .section-label {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--red);
-    border-left: 3px solid var(--red);
-    padding-left: 0.8rem;
-    margin-bottom: 1.2rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--gray-dark);
-    line-height: 1.1;
-  }
-  .section-title em { color: var(--red); font-style: normal; }
-
-  /* ── SOBRE ── */
-  #sobre { background: var(--off-white); }
-
-  .sobre-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .sobre-text p {
-    color: var(--gray-mid);
-    line-height: 1.8;
-    font-size: 1.05rem;
-    margin-bottom: 1.2rem;
-  }
-  .sobre-text p strong { color: var(--gray-dark); font-weight: 600; }
-
-  .sobre-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-    margin-top: 2rem;
-  }
-  .stat-card {
-    background: var(--white);
-    border: 1px solid rgba(0,0,0,0.06);
-    border-top: 3px solid var(--red);
-    padding: 1.4rem 1.2rem;
-    border-radius: 4px;
-  }
-  .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem; font-weight: 800;
-    color: var(--red); line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .stat-label {
-    font-size: 0.82rem; color: var(--gray-mid);
-    font-weight: 500;
-  }
-
-  .sobre-visual {
-    position: relative;
-  }
-  .sobre-card-main {
-    background: var(--gray-dark);
-    border-radius: 8px;
-    padding: 2.5rem;
-    color: var(--white);
-    position: relative;
-    overflow: hidden;
-  }
-  .sobre-card-main::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(192,57,43,0.25), transparent 70%);
-  }
-  .sobre-card-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.5rem;
-    color: var(--white); margin-bottom: 0.3rem;
-  }
-  .sobre-card-logo span { color: var(--red-light); }
-  .sobre-card-inst {
-    font-size: 0.78rem; color: rgba(255,255,255,0.5);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 2rem;
-  }
-  .sobre-card-tags {
-    display: flex; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .tag {
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    font-size: 0.78rem; font-weight: 500;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.75);
-  }
-  .tag.red { background: rgba(192,57,43,0.25); border-color: rgba(192,57,43,0.4); color: #FF8070; }
-  .sobre-quote {
-    margin-top: 1.5rem;
-    border-left: 3px solid var(--red-light);
-    padding-left: 1rem;
-    font-style: italic;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-
-  /* ── CANAIS ── */
-  #canais { background: var(--white); }
-  .canais-header { max-width: 600px; margin-bottom: 3rem; }
-
-  .canais-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 1100px;
-  }
-  .canal-card {
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 8px;
-    padding: 2rem;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    background: var(--white);
-  }
-  .canal-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--red);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: left;
-  }
-  .canal-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
-  .canal-card:hover::before { transform: scaleX(1); }
-
-  .canal-icon {
-    width: 48px; height: 48px;
-    border-radius: 10px;
-    background: rgba(192,57,43,0.1);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.2rem;
-    font-size: 1.4rem;
-  }
-  .canal-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700; font-size: 1.15rem;
-    color: var(--gray-dark);
-    margin-bottom: 0.6rem;
-  }
-  .canal-desc {
-    font-size: 0.9rem; line-height: 1.7;
-    color: var(--gray-mid);
-    margin-bottom: 1.5rem;
-  }
-  .canal-link {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    font-size: 0.85rem; font-weight: 600;
-    color: var(--red); text-decoration: none;
-    transition: gap 0.2s;
-  }
-  .canal-link:hover { gap: 0.7rem; }
-
-  /* ── EVENTOS ── */
-  #eventos { background: var(--gray-dark); }
-  #eventos .section-label { color: #FF8070; }
-  #eventos .section-title { color: var(--white); }
-  #eventos .section-title em { color: var(--red-light); }
-
-  .eventos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 3rem;
-    max-width: 1100px;
-  }
-  .eventos-col-title {
-    font-size: 0.78rem; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .evento-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .evento-card:hover { background: rgba(255,255,255,0.07); }
-  .evento-card.destaque {
-    border-color: rgba(192,57,43,0.4);
-    background: rgba(192,57,43,0.08);
-  }
-  .evento-card.destaque::before {
-    content: 'REALIZADO';
-    position: absolute; top: 1rem; right: 1rem;
-    font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #FF8070;
-    background: rgba(192,57,43,0.2);
-    padding: 0.2rem 0.6rem;
-    border-radius: 100px;
-  }
-  .evento-card.futuro::before {
-    content: 'EM BREVE';
-    position: absolute; top: 1rem; right: 1rem;
-    font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    background: rgba(212,175,55,0.12);
-    padding: 0.2rem 0.6rem;
-    border-radius: 100px;
-  }
-  .evento-data {
-    font-size: 0.78rem; color: rgba(255,255,255,0.4);
-    font-weight: 500; margin-bottom: 0.4rem;
-  }
-  .evento-nome {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    color: var(--white); margin-bottom: 0.3rem;
-  }
-  .evento-desc {
-    font-size: 0.85rem; line-height: 1.6;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 0.8rem;
-  }
-  .evento-talks {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-  }
-  .evento-talk {
-    font-size: 0.73rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.55);
-    padding: 0.2rem 0.6rem; border-radius: 100px;
-  }
-
-  /* ── FORMAÇÃO ── */
-  #formacao { background: var(--off-white); }
-  .formacao-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    margin-top: 3rem;
-    max-width: 1100px;
-  }
-  .formacao-item {
-    background: var(--white);
-    border-radius: 6px;
-    padding: 1.8rem 1.5rem;
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: all 0.3s;
-    display: flex; flex-direction: column; gap: 0.8rem;
-  }
-  .formacao-item:hover {
-    border-color: var(--red);
-    box-shadow: 0 4px 20px rgba(192,57,43,0.1);
-    transform: translateY(-2px);
-  }
-  .formacao-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem; font-weight: 800;
-    color: rgba(192,57,43,0.15);
-    line-height: 1;
-  }
-  .formacao-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    color: var(--gray-dark);
-  }
-  .formacao-desc {
-    font-size: 0.87rem; line-height: 1.65;
-    color: var(--gray-mid);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: #1A1A1A;
-    padding: 4rem clamp(1.5rem, 6vw, 6rem) 2rem;
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 2rem;
-  }
-  .footer-brand-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-  }
-  .footer-brand-name span { color: var(--red-light); }
-  .footer-brand-inst {
-    font-size: 0.75rem; color: rgba(255,255,255,0.35);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
-  .footer-brand-desc {
-    font-size: 0.88rem; line-height: 1.7;
-    color: rgba(255,255,255,0.45); max-width: 300px;
-  }
-  .footer-col-title {
-    font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 1.2rem;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 0.6rem; }
-  .footer-col a {
-    text-decoration: none; color: rgba(255,255,255,0.5);
-    font-size: 0.88rem; transition: color 0.2s;
-  }
-  .footer-col a:hover { color: var(--red-light); }
-  .social-links { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
-  .social-btn {
-    width: 36px; height: 36px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none; color: rgba(255,255,255,0.55);
-    font-size: 0.9rem; transition: all 0.2s;
-  }
-  .social-btn:hover { background: var(--red); color: var(--white); border-color: var(--red); }
-  .footer-bottom {
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
-  .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
-  .footer-bottom a:hover { color: var(--red-light); }
-  .ufop-badge {
-    display: flex; align-items: center; gap: 0.6rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    font-size: 0.78rem; color: rgba(255,255,255,0.35);
-  }
-  .ufop-badge strong { color: rgba(255,255,255,0.55); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-  .reveal-d1 { transition-delay: 0.1s; }
-  .reveal-d2 { transition-delay: 0.2s; }
-  .reveal-d3 { transition-delay: 0.3s; }
-
-  /* ── HAMBURGER MOBILE ── */
-  .hamburger {
-    display: none;
-    flex-direction: column; gap: 4px;
-    background: none; border: none; cursor: pointer;
-    padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: var(--gray-dark); border-radius: 2px;
-    transition: all 0.3s;
-  }
-  .mobile-menu {
-    display: none;
-    position: fixed; top: 64px; left: 0; right: 0;
-    background: var(--white);
-    border-bottom: 2px solid var(--red);
-    padding: 1.5rem 2rem;
-    z-index: 99;
-    flex-direction: column; gap: 1rem;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-size: 1rem; font-weight: 500;
-    color: var(--gray-mid); text-decoration: none;
-    padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);
-  }
-  .mobile-menu a:hover { color: var(--red); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav ul, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-
-    /* Hero: single column, visual shown small below content */
-    #hero {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding-top: 5.5rem;
-      padding-bottom: 3.5rem;
-      min-height: auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibreUFOP – Software Livre, Formação e Integração com a Comunidade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --red: #C0392B;
+      --red-dark: #922B21;
+      --red-light: #E74C3C;
+      --gray-dark: #2C2C2C;
+      --gray-mid: #5A5A5A;
+      --gray-light: #EFEFEF;
+      --white: #FFFFFF;
+      --off-white: #F8F6F4;
+      --accent: #D4AF37;
+      --text: #1A1A1A;
     }
-    .hero-eyebrow { justify-content: center; }
-    .hero-subtitle { margin-left: auto; margin-right: auto; }
-    .hero-actions { justify-content: center; }
-    .hero-visual {
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--red);
       display: flex;
-      margin: 0 auto;
-    }
-    .hero-badge-stack {
-      width: clamp(160px, 50vw, 260px);
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
     }
 
-    .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .canais-grid { grid-template-columns: 1fr; }
-    .eventos-grid { grid-template-columns: 1fr; }
-    .formacao-grid { grid-template-columns: 1fr 1fr; }
-    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-  }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--red);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-  @media (max-width: 600px) {
-    /* Hero fine-tuning for small phones */
+    .nav-logo span {
+      color: var(--gray-dark);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--gray-mid);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--red);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red-dark) !important;
+    }
+
+    /* ── HERO ── */
     #hero {
-      padding-top: 5rem;
-      padding-bottom: 3rem;
+      min-height: 100svh;
+      background: var(--gray-dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 5.5rem clamp(1.25rem, 6vw, 6rem) 4rem;
+      gap: 3rem;
     }
-    .hero-badge-stack {
-      width: clamp(140px, 55vw, 220px);
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(192, 57, 43, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192, 57, 43, 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
-    .hero-badge-ring2 { display: none; } /* hide outermost ring to avoid overflow */
+
+    .hero-bg-circle {
+      position: absolute;
+      right: -10%;
+      top: -15%;
+      width: 65vw;
+      height: 65vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192, 57, 43, 0.22) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-bg-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), transparent);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(192, 57, 43, 0.15);
+      border: 1px solid rgba(192, 57, 43, 0.4);
+      color: #FF6B5B;
+      font-size: clamp(0.65rem, 2vw, 0.78rem);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s ease both;
+      max-width: 100%;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      background: var(--red-light);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.5);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 11vw, 7rem);
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-title em {
+      color: var(--red-light);
+      font-style: normal;
+    }
+
+    .hero-slogan {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(0.85rem, 3.5vw, 1.4rem);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.92rem, 2.5vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
     .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(192, 57, 43, 0.4);
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(192, 57, 43, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.8rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+
+    .hero-badge-stack {
+      position: relative;
+      width: clamp(180px, 36vw, 440px);
+      aspect-ratio: 1;
+    }
+
+    .hero-badge-main {
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(192, 57, 43, 0.3);
+      border-radius: 50%;
+      display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    .btn-primary, .btn-secondary {
-      width: 100%;
       justify-content: center;
-      max-width: 320px;
+      text-align: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at 30% 40%, rgba(192, 57, 43, 0.12), rgba(0, 0, 0, 0));
     }
 
-    .sobre-stats { grid-template-columns: 1fr 1fr; }
-    .formacao-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-    .ufop-badge { width: 100%; }
-  }
+    .hero-badge-ring {
+      position: absolute;
+      inset: -16px;
+      border: 1px dashed rgba(192, 57, 43, 0.2);
+      border-radius: 50%;
+      animation: spin 24s linear infinite;
+    }
 
-  @media (max-width: 380px) {
-    .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.04em; }
-    .hero-badge-stack { width: 130px; }
-  }
-</style>
+    .hero-badge-ring2 {
+      position: absolute;
+      inset: -40px;
+      border: 1px dashed rgba(192, 57, 43, 0.1);
+      border-radius: 50%;
+      animation: spin 40s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── LOGO IMAGE — animação rotateX em torno do eixo X ── */
+    .hero-logo-img {
+      width: clamp(110px, 22vw, 240px);
+      height: clamp(110px, 22vw, 240px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      box-shadow:
+        0 8px 32px rgba(192, 57, 43, 0.55),
+        0 2px 12px rgba(0, 0, 0, 0.5),
+        0 0 0 3px rgba(192, 57, 43, 0.35);
+      animation: tiltX 5s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes tiltX {
+      0% {
+        transform: perspective(600px) rotateY(0deg) scale(1);
+      }
+
+      20% {
+        transform: perspective(600px) rotateY(18deg) scale(1.03);
+      }
+
+      40% {
+        transform: perspective(600px) rotateY(-14deg) scale(0.97);
+      }
+
+      60% {
+        transform: perspective(600px) rotateY(10deg) scale(1.02);
+      }
+
+      80% {
+        transform: perspective(600px) rotateY(-8deg) scale(0.98);
+      }
+
+      100% {
+        transform: perspective(600px) rotateY(0deg) scale(1);
+      }
+    }
+
+    .hero-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--red-light);
+      opacity: 0.7;
+    }
+
+    .hero-dot-1 {
+      width: 10px;
+      height: 10px;
+      top: 8%;
+      right: 22%;
+      animation: floatDot 4s 0s ease-in-out infinite;
+    }
+
+    .hero-dot-2 {
+      width: 6px;
+      height: 6px;
+      bottom: 12%;
+      left: 15%;
+      animation: floatDot 5s 1s ease-in-out infinite;
+    }
+
+    .hero-dot-3 {
+      width: 14px;
+      height: 14px;
+      top: 40%;
+      right: 5%;
+      background: var(--accent);
+      animation: floatDot 3.5s 0.5s ease-in-out infinite;
+    }
+
+    @keyframes floatDot {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-left: 3px solid var(--red);
+      padding-left: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--gray-dark);
+      line-height: 1.1;
+    }
+
+    .section-title em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    /* ── SOBRE ── */
+    #sobre {
+      background: var(--off-white);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sobre-text p {
+      color: var(--gray-mid);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .sobre-text p strong {
+      color: var(--gray-dark);
+      font-weight: 600;
+    }
+
+    .sobre-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-top: 3px solid var(--red);
+      padding: 1.4rem 1.2rem;
+      border-radius: 4px;
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      font-weight: 500;
+    }
+
+    .sobre-visual {
+      position: relative;
+    }
+
+    .sobre-card-main {
+      background: var(--gray-dark);
+      border-radius: 8px;
+      padding: 2.5rem;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sobre-card-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(192, 57, 43, 0.25), transparent 70%);
+    }
+
+    .sobre-card-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .sobre-card-logo span {
+      color: var(--red-light);
+    }
+
+    .sobre-card-inst {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .sobre-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .tag.red {
+      background: rgba(192, 57, 43, 0.25);
+      border-color: rgba(192, 57, 43, 0.4);
+      color: #FF8070;
+    }
+
+    .sobre-quote {
+      margin-top: 1.5rem;
+      border-left: 3px solid var(--red-light);
+      padding-left: 1rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* ── CANAIS ── */
+    #canais {
+      background: var(--white);
+    }
+
+    .canais-header {
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .canais-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+    }
+
+    .canal-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .canal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+
+    .canal-card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .canal-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .canal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(192, 57, 43, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+
+    .canal-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--gray-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .canal-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--gray-mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .canal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--red);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .canal-link:hover {
+      gap: 0.7rem;
+    }
+
+    /* ── EVENTOS ── */
+    #eventos {
+      background: var(--gray-dark);
+    }
+
+    #eventos .section-label {
+      color: #FF8070;
+    }
+
+    #eventos .section-title {
+      color: var(--white);
+    }
+
+    #eventos .section-title em {
+      color: var(--red-light);
+    }
+
+    .eventos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 1100px;
+    }
+
+    .eventos-col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .evento-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .evento-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .evento-card.destaque {
+      border-color: rgba(192, 57, 43, 0.4);
+      background: rgba(192, 57, 43, 0.08);
+    }
+
+    /* Card clicável — eventos realizados */
+    a.evento-card {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      display: block;
+    }
+
+    a.evento-card:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(192, 57, 43, 0.6) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s;
+    }
+
+    a.evento-card .evento-nome::after {
+      content: ' ↗';
+      font-size: 0.8em;
+      opacity: 0.5;
+    }
+
+    .evento-card.destaque::before {
+      content: 'REALIZADO';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #FF8070;
+      background: rgba(192, 57, 43, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .evento-card.futuro::before {
+      content: 'EM BREVE';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: rgba(212, 175, 55, 0.12);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .evento-data {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .evento-nome {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .evento-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    .evento-talks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .evento-talk {
+      font-size: 0.73rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.55);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    /* ── FORMAÇÃO ── */
+    #formacao {
+      background: var(--off-white);
+    }
+
+    .formacao-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+      max-width: 1100px;
+    }
+
+    .formacao-item {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 1.8rem 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .formacao-item:hover {
+      border-color: var(--red);
+      box-shadow: 0 4px 20px rgba(192, 57, 43, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .formacao-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(192, 57, 43, 0.15);
+      line-height: 1;
+    }
+
+    .formacao-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-dark);
+    }
+
+    .formacao-desc {
+      font-size: 0.87rem;
+      line-height: 1.65;
+      color: var(--gray-mid);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A1A1A;
+      padding: 4rem clamp(1.5rem, 6vw, 6rem) 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-brand-name span {
+      color: var(--red-light);
+    }
+
+    .footer-brand-inst {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.45);
+      max-width: 300px;
+    }
+
+    .footer-col-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--red-light);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .social-btn:hover {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--red-light);
+    }
+
+    .ufop-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .ufop-badge strong {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-d1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-d2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-d3 {
+      transition-delay: 0.3s;
+    }
+
+    /* ── HAMBURGER MOBILE ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--gray-dark);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 2px solid var(--red);
+      padding: 1.5rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray-mid);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--red);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+
+      nav ul,
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      /* Hero: single column, visual shown small below content */
+      #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 5.5rem;
+        padding-bottom: 3.5rem;
+        min-height: auto;
+      }
+
+      .hero-eyebrow {
+        justify-content: center;
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        display: flex;
+        margin: 0 auto;
+      }
+
+      .hero-badge-stack {
+        width: clamp(160px, 50vw, 260px);
+      }
+
+      .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .canais-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .eventos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .formacao-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      /* Hero fine-tuning for small phones */
+      #hero {
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+      }
+
+      .hero-badge-stack {
+        width: clamp(140px, 55vw, 220px);
+      }
+
+      .hero-badge-ring2 {
+        display: none;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        max-width: 320px;
+      }
+
+      .sobre-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .formacao-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ufop-badge {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-eyebrow {
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+      }
+
+      .hero-badge-stack {
+        width: 130px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="9" stroke="#C0392B" stroke-width="1.5"/>
-      <path d="M6 10h8M10 6v8" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    Libre<span>UFOP</span>
-  </div>
-  <ul>
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#canais">Canais</a></li>
-    <li><a href="#eventos">Eventos</a></li>
-    <li><a href="#formacao">Formação</a></li>
-    <li><a href="#contato" class="nav-cta">Contato</a></li>
-  </ul>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
-  <a href="#canais" onclick="toggleMenu()">Canais</a>
-  <a href="#eventos" onclick="toggleMenu()">Eventos</a>
-  <a href="#formacao" onclick="toggleMenu()">Formação</a>
-  <a href="#contato" onclick="toggleMenu()">Contato</a>
-</div>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-bg-circle"></div>
-  <div class="hero-bg-line"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">ICEA · UFOP · João Monlevade</div>
-    <h1 class="hero-title">Libre<em>UFOP</em></h1>
-    <p class="hero-slogan">Programar Liberta!</p>
-    <p class="hero-subtitle">Software Livre, Formação e Integração com a Comunidade. Promovendo soberania digital e conhecimento aberto na Universidade Federal de Ouro Preto.</p>
-    <div class="hero-actions">
-      <a href="#sobre" class="btn-primary">
-        Conheça nossas iniciativas
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#eventos" class="btn-secondary">
-        Próximos eventos
-      </a>
-    </div>
-  </div>
-
-  <div class="hero-visual">
-    <div class="hero-badge-stack">
-      <div class="hero-badge-ring"></div>
-      <div class="hero-badge-ring2"></div>
-      <div class="hero-badge-main">
-        <div class="hero-icon-gnu">🐃</div>
-        <div class="hero-badge-text">GNU/<br>Linux</div>
-        <div class="hero-badge-sub">Software Livre · UFOP</div>
-      </div>
-      <div class="hero-dot hero-dot-1"></div>
-      <div class="hero-dot hero-dot-2"></div>
-      <div class="hero-dot hero-dot-3"></div>
-    </div>
-  </div>
-</section>
-
-<!-- SOBRE -->
-<section id="sobre">
-  <div class="sobre-grid">
-    <div class="sobre-text reveal">
-      <div class="section-label">Sobre o Projeto</div>
-      <h2 class="section-title" style="margin-bottom:1.5rem">Conhecimento livre <em>para todos</em></h2>
-      <p>O <strong>LibreUFOP</strong> é um projeto de extensão vinculado ao ICEA — Instituto de Ciências Exatas e Aplicadas da Universidade Federal de Ouro Preto, no campus de João Monlevade.</p>
-      <p>Nossa missão é <strong>promover a soberania digital</strong> e disseminar o conhecimento livre, aproximando a universidade da comunidade por meio de eventos, capacitações e produção de conteúdo sobre tecnologias abertas.</p>
-      <p>Acreditamos que o acesso ao conhecimento tecnológico é um direito. Por isso, trabalhamos para que qualquer pessoa — estudante, professor ou cidadão — possa aprender, usar e contribuir com o <strong>software livre</strong>.</p>
-
-      <div class="sobre-stats">
-        <div class="stat-card">
-          <div class="stat-number">ICEA</div>
-          <div class="stat-label">Campus João Monlevade</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">UFOP</div>
-          <div class="stat-label">Universidade Federal de Ouro Preto</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Tecnologias de código aberto</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Conhecimento compartilhado</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sobre-visual reveal reveal-d2">
-      <div class="sobre-card-main">
-        <div class="sobre-card-logo">Libre<span>UFOP</span></div>
-        <div class="sobre-card-inst">Extensão Universitária · UFOP</div>
-        <div class="sobre-card-tags">
-          <span class="tag red">GNU/Linux</span>
-          <span class="tag">Software Livre</span>
-          <span class="tag">Redes Federadas</span>
-          <span class="tag red">Soberania Digital</span>
-          <span class="tag">Open Source</span>
-          <span class="tag">Comunidade</span>
-          <span class="tag red">FLISOL</span>
-          <span class="tag">Debian</span>
-          <span class="tag">Criatividade</span>
-        </div>
-        <blockquote class="sobre-quote">
-          "A liberdade de usar, estudar, modificar e distribuir software é um bem coletivo que pertence a toda a humanidade."
-        </blockquote>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CANAIS -->
-<section id="canais">
-  <div class="canais-header reveal">
-    <div class="section-label">Canais de Conteúdo</div>
-    <h2 class="section-title">Acompanhe <em>onde preferir</em></h2>
-  </div>
-  <div class="canais-grid">
-    <div class="canal-card reveal">
-      <div class="canal-icon">🎙️</div>
-      <div class="canal-title">Podcast</div>
-      <p class="canal-desc">Episódios com discussões aprofundadas, entrevistas e análises sobre o ecossistema de software livre, cultura hacker e soberania digital.</p>
-      <a href="#" class="canal-link">Ouvir episódios →</a>
-    </div>
-    <div class="canal-card reveal reveal-d1">
-      <div class="canal-icon">✉️</div>
-      <div class="canal-title">Newsletter</div>
-      <p class="canal-desc">Receba diretamente no seu e-mail novidades, tutoriais, dicas de ferramentas livres e informações sobre nossos próximos eventos e atividades.</p>
-      <a href="#" class="canal-link">Assinar a newsletter →</a>
-    </div>
-    <div class="canal-card reveal reveal-d2">
-      <div class="canal-icon">📡</div>
-      <div class="canal-title">Feed RSS</div>
-      <p class="canal-desc">Acompanhe todas as nossas atualizações em tempo real de forma descentralizada, sem depender de algoritmos ou plataformas proprietárias.</p>
-      <a href="#" class="canal-link">Assinar o feed →</a>
-    </div>
-  </div>
-</section>
-
-<!-- EVENTOS -->
-<section id="eventos">
-  <div class="reveal">
-    <div class="section-label">Eventos</div>
-    <h2 class="section-title">Nossa <em>linha do tempo</em></h2>
-  </div>
-  <div class="eventos-grid">
-    <!-- Passados -->
-    <div class="reveal">
-      <div class="eventos-col-title">● Realizados</div>
-      <div class="evento-card destaque">
-        <div class="evento-data">Abril · 2026 · João Monlevade</div>
-        <div class="evento-nome">FLISOL 2026</div>
-        <div class="evento-desc">Festival Latino-americano de Instalação de Software Livre — edição realizada pelo LibreUFOP no campus ICEA, com palestras, installfest e atividades para toda a comunidade.</div>
-        <div class="evento-talks">
-          <span class="evento-talk">Redes Federadas</span>
-          <span class="evento-talk">Soberania Digital na Educação</span>
-          <span class="evento-talk">GNU/Linux</span>
-          <span class="evento-talk">Installfest</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Futuros -->
-    <div class="reveal reveal-d1">
-      <div class="eventos-col-title">◌ Em breve</div>
-      <div class="evento-card futuro" style="margin-bottom:1rem">
-        <div class="evento-data">Em breve · 2026</div>
-        <div class="evento-nome">Debian Day</div>
-        <div class="evento-desc">Celebração anual do nascimento do Projeto Debian, com instalação, tutoriais e discussões sobre a distribuição GNU/Linux mais influente da história.</div>
-        <div class="evento-talks">
-          <span class="evento-talk">Debian GNU/Linux</span>
-          <span class="evento-talk">Empacotamento</span>
-          <span class="evento-talk">Comunidade</span>
-        </div>
-      </div>
-      <div class="evento-card futuro">
-        <div class="evento-data">Em breve · 2026</div>
-        <div class="evento-nome">DevOps Day</div>
-        <div class="evento-desc">Evento com foco em cultura DevOps, ferramentas abertas de CI/CD, containers, automação e infraestrutura como código.</div>
-        <div class="evento-talks">
-          <span class="evento-talk">CI/CD</span>
-          <span class="evento-talk">Containers</span>
-          <span class="evento-talk">Linux</span>
-          <span class="evento-talk">Automação</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORMAÇÃO -->
-<section id="formacao">
-  <div class="reveal">
-    <div class="section-label">Temas de Formação</div>
-    <h2 class="section-title">O que <em>ensinamos</em></h2>
-  </div>
-  <div class="formacao-grid">
-    <div class="formacao-item reveal">
-      <div class="formacao-num">01</div>
-      <div class="formacao-title">Instalação de Software Livre</div>
-      <p class="formacao-desc">Guiamos pessoas no processo de instalar e configurar sistemas GNU/Linux e softwares livres, com suporte presencial e materiais didáticos abertos.</p>
-    </div>
-    <div class="formacao-item reveal reveal-d1">
-      <div class="formacao-num">02</div>
-      <div class="formacao-title">Software Livre para Criativos</div>
-      <p class="formacao-desc">Apresentamos alternativas livres para design gráfico, edição de vídeo, produção musical e arte digital — Inkscape, GIMP, Kdenlive, Blender e mais.</p>
-    </div>
-    <div class="formacao-item reveal reveal-d2">
-      <div class="formacao-num">03</div>
-      <div class="formacao-title">Redes Federadas e Soberania Digital</div>
-      <p class="formacao-desc">Exploramos protocolos abertos como ActivityPub, Mastodon e Matrix — construindo alternativas descentralizadas às Big Techs.</p>
-    </div>
-    <div class="formacao-item reveal">
-      <div class="formacao-num">04</div>
-      <div class="formacao-title">GNU/Linux do Zero</div>
-      <p class="formacao-desc">Oficinas introdutórias para quem nunca usou Linux: linha de comando, gerenciadores de pacotes, sistema de arquivos e customização.</p>
-    </div>
-    <div class="formacao-item reveal reveal-d1">
-      <div class="formacao-num">05</div>
-      <div class="formacao-title">Cultura Hacker e Ética Digital</div>
-      <p class="formacao-desc">Discussões sobre privacidade, ética no uso da tecnologia, história do movimento do software livre e o pensamento de Richard Stallman e Linus Torvalds.</p>
-    </div>
-    <div class="formacao-item reveal reveal-d2">
-      <div class="formacao-num">06</div>
-      <div class="formacao-title">Contribuindo com Projetos Livres</div>
-      <p class="formacao-desc">Como dar os primeiros passos na contribuição com projetos open source: Git, GitHub, comunicação em comunidades e fluxo de contribuição.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contato">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-brand-name">Libre<span>UFOP</span></div>
-      <div class="footer-brand-inst">ICEA · Universidade Federal de Ouro Preto</div>
-      <p class="footer-brand-desc">Projeto de extensão dedicado à promoção do software livre, soberania digital e formação tecnológica no campus de João Monlevade.</p>
-      <div class="social-links" style="margin-top:1.2rem">
-        <a href="#" class="social-btn" aria-label="Mastodon" title="Mastodon">🦣</a>
-        <a href="#" class="social-btn" aria-label="Peertube" title="PeerTube">📺</a>
-        <a href="#" class="social-btn" aria-label="GitHub" title="GitHub">🐙</a>
-        <a href="#" class="social-btn" aria-label="Matrix" title="Matrix">💬</a>
-        <a href="#" class="social-btn" aria-label="Email" title="E-mail">✉️</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Navegação</div>
-      <ul>
-        <li><a href="#sobre">Sobre o projeto</a></li>
-        <li><a href="#canais">Canais de conteúdo</a></li>
-        <li><a href="#eventos">Eventos</a></li>
-        <li><a href="#formacao">Formação</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Contato</div>
-      <ul>
-        <li><a href="mailto:libreufop@ufop.edu.br">libreufop@ufop.edu.br</a></li>
-        <li><a href="https://ufop.br" target="_blank" rel="noopener">ufop.br</a></li>
-        <li><a href="#">Newsletter</a></li>
-        <li><a href="#">Feed RSS</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 LibreUFOP · Conteúdo licenciado sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></p>
-    <div class="ufop-badge">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <circle cx="9" cy="9" r="8" stroke="#C0392B" stroke-width="1.2"/>
-        <path d="M5 9h8M9 5v8" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="9" stroke="#C0392B" stroke-width="1.5" />
+        <path d="M6 10h8M10 6v8" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" />
       </svg>
-      <span><strong>UFOP</strong> · Universidade Federal de Ouro Preto</span>
+      Libre<span>UFOP</span>
     </div>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#canais">Canais</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#formacao">Formação</a></li>
+      <li><a href="#contato" class="nav-cta">Contato</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+    <a href="#canais" onclick="toggleMenu()">Canais</a>
+    <a href="#eventos" onclick="toggleMenu()">Eventos</a>
+    <a href="#formacao" onclick="toggleMenu()">Formação</a>
+    <a href="#contato" onclick="toggleMenu()">Contato</a>
   </div>
-</footer>
 
-<script>
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-line"></div>
 
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
+    <div class="hero-content">
+      <div class="hero-eyebrow">ICEA · UFOP · João Monlevade</div>
+      <h1 class="hero-title">Libre<em>UFOP</em></h1>
+      <p class="hero-slogan">Programar Liberta!</p>
+      <p class="hero-subtitle">Software Livre, Formação e Integração com a Comunidade. Promovendo soberania digital e
+        conhecimento aberto na Universidade Federal de Ouro Preto.</p>
+      <div class="hero-actions">
+        <a href="#sobre" class="btn-primary">
+          Conheça nossas iniciativas
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+        <a href="#eventos" class="btn-secondary">
+          Próximos eventos
+        </a>
+      </div>
+    </div>
 
-  // Close mobile menu on resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) {
-      document.getElementById('mobileMenu').classList.remove('open');
+    <div class="hero-visual">
+      <div class="hero-badge-stack">
+        <div class="hero-badge-ring"></div>
+        <div class="hero-badge-ring2"></div>
+        <div class="hero-badge-main">
+          <img src="logo_libreUfop.jpg" alt="LibreUFOP Logo" class="hero-logo-img" />
+        </div>
+        <div class="hero-dot hero-dot-1"></div>
+        <div class="hero-dot hero-dot-2"></div>
+        <div class="hero-dot hero-dot-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sobre-grid">
+      <div class="sobre-text reveal">
+        <div class="section-label">Sobre o Projeto</div>
+        <h2 class="section-title" style="margin-bottom:1.5rem">Conhecimento livre <em>para todos</em></h2>
+        <p>O <strong>LibreUFOP</strong> é um projeto de extensão vinculado ao ICEA — Instituto de Ciências Exatas e
+          Aplicadas da Universidade Federal de Ouro Preto, no campus de João Monlevade.</p>
+        <p>Nossa missão é <strong>promover a soberania digital</strong> e disseminar o conhecimento livre, aproximando a
+          universidade da comunidade por meio de eventos, capacitações e produção de conteúdo sobre tecnologias abertas.
+        </p>
+        <p>Acreditamos que o acesso ao conhecimento tecnológico é um direito. Por isso, trabalhamos para que qualquer
+          pessoa — estudante, professor ou cidadão — possa aprender, usar e contribuir com o <strong>software
+            livre</strong>.</p>
+
+        <div class="sobre-stats">
+          <div class="stat-card">
+            <div class="stat-number">ICEA</div>
+            <div class="stat-label">Campus João Monlevade</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">UFOP</div>
+            <div class="stat-label">Universidade Federal de Ouro Preto</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Tecnologias de código aberto</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Conhecimento compartilhado</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sobre-visual reveal reveal-d2">
+        <div class="sobre-card-main">
+          <div class="sobre-card-logo">Libre<span>UFOP</span></div>
+          <div class="sobre-card-inst">Extensão Universitária · UFOP</div>
+          <div class="sobre-card-tags">
+            <span class="tag red">GNU/Linux</span>
+            <span class="tag">Software Livre</span>
+            <span class="tag">Redes Federadas</span>
+            <span class="tag red">Soberania Digital</span>
+            <span class="tag">Open Source</span>
+            <span class="tag">Comunidade</span>
+            <span class="tag red">FLISOL</span>
+            <span class="tag">Debian</span>
+            <span class="tag">Criatividade</span>
+          </div>
+          <blockquote class="sobre-quote">
+            "A liberdade de usar, estudar, modificar e distribuir software é um bem coletivo que pertence a toda a
+            humanidade."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CANAIS -->
+  <section id="canais">
+    <div class="canais-header reveal">
+      <div class="section-label">Canais de Conteúdo</div>
+      <h2 class="section-title">Acompanhe <em>onde preferir</em></h2>
+    </div>
+    <div class="canais-grid">
+      <div class="canal-card reveal">
+        <div class="canal-icon">🎙️</div>
+        <div class="canal-title">Podcast</div>
+        <p class="canal-desc">Episódios com discussões aprofundadas, entrevistas e análises sobre o ecossistema de
+          software livre, cultura hacker e soberania digital.</p>
+        <a href="#" class="canal-link">Ouvir episódios →</a>
+      </div>
+      <div class="canal-card reveal reveal-d1">
+        <div class="canal-icon">✉️</div>
+        <div class="canal-title">Newsletter</div>
+        <p class="canal-desc">Receba diretamente no seu e-mail novidades, tutoriais, dicas de ferramentas livres e
+          informações sobre nossos próximos eventos e atividades.</p>
+        <a href="#" class="canal-link">Assinar a newsletter →</a>
+      </div>
+      <div class="canal-card reveal reveal-d2">
+        <div class="canal-icon">📡</div>
+        <div class="canal-title">Feed RSS</div>
+        <p class="canal-desc">Acompanhe todas as nossas atualizações em tempo real de forma descentralizada, sem
+          depender de algoritmos ou plataformas proprietárias.</p>
+        <a href="#" class="canal-link">Assinar o feed →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTOS -->
+  <section id="eventos">
+    <div class="reveal">
+      <div class="section-label">Eventos</div>
+      <h2 class="section-title">Nossa <em>linha do tempo</em></h2>
+    </div>
+
+    <div class="eventos-grid">
+
+      <!-- REALIZADOS -->
+      <div class="reveal">
+        <div class="eventos-col-title">● Realizados</div>
+
+        <!-- Debian Day -->
+        <a href="https://wiki.debian.org/DebianDay/2025/Brazil/JoaoMonlevade" target="_blank" rel="noopener"
+          class="evento-card destaque" style="margin-bottom:1rem; display:block;">
+
+          <div class="evento-data">16 de Agosto · 2025 · João Monlevade</div>
+
+          <div class="evento-nome">Debian Day 2025</div>
+
+          <div class="evento-desc">
+            Celebração do aniversário do Projeto Debian realizada no Laboratório H102 do
+            ICEA/UFOP — com Festival de Instalação, Lightning Talks e palestras sobre o
+            ecossistema Debian GNU/Linux.
+          </div>
+
+          <div class="evento-talks">
+            <span class="evento-talk">Festival de Instalação</span>
+            <span class="evento-talk">Lightning Talks</span>
+            <span class="evento-talk">Debian GNU/Linux com C</span>
+            <span class="evento-talk">Projeto Debian</span>
+          </div>
+
+          <div style="margin-top:0.9rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.8rem;">
+
+            <div
+              style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:0.5rem;">
+              Programação · 16/08/2025 · 8h–13h
+            </div>
+
+            <div style="font-size:0.78rem; color:rgba(255,255,255,0.45); line-height:1.8;">
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">8h</span>
+              Abertura e Festival de Instalação<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">9h30</span>
+              Palestra — Debian GNU/Linux com C · Igor Muzetti<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">10h30</span>
+              Lightning Talks — Mostre seu Debian · Estudantes<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">11h</span>
+              Palestra — O projeto Debian quer você! · Paulo Santana<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">12h30</span>
+              Encerramento e confraternização
+            </div>
+
+            <div style="margin-top:0.6rem; font-size:0.72rem; color:rgba(255,255,255,0.3);">
+              📍 UFOP/ICEA · João Monlevade — MG
+            </div>
+
+          </div>
+        </a>
+
+        <!-- FLISOL -->
+        <a href="https://flisol.info/FLISOL2026/Brasil/JoaoMonlevade" target="_blank" rel="noopener"
+          class="evento-card destaque" style="display:block;">
+
+          <div class="evento-data">25 de Abril · 2026 · João Monlevade</div>
+
+          <div class="evento-nome">FLISOL 2026</div>
+
+          <div class="evento-desc">
+            Festival Latino-americano de Instalação de Software Livre — edição realizada
+            pelo LibreUFOP no campus ICEA, com palestras, installfest e atividades para
+            toda a comunidade.
+          </div>
+
+          <div class="evento-talks">
+            <span class="evento-talk">Redes Federadas</span>
+            <span class="evento-talk">Soberania Digital na Educação</span>
+            <span class="evento-talk">GNU/Linux</span>
+            <span class="evento-talk">Installfest</span>
+            <span class="evento-talk">Software Livre Criativo</span>
+            <span class="evento-talk">Soberania Digital</span>
+          </div>
+
+          <div style="margin-top:0.9rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.8rem;">
+
+            <div
+              style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:0.5rem;">
+              Programação · 25/04/2026 · 8h–17h
+            </div>
+
+            <div style="font-size:0.78rem; color:rgba(255,255,255,0.45); line-height:1.9;">
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">8h00</span>
+              Boas-vindas — Wagner Ragi (Diretor ICEA) · Igor Muzetti (LECoMP)<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">8h15</span>
+              Festival de Instalação de Software Livre · Igor Muzetti<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">9h45</span>
+              Software livre para profissionais criativos · Marcello de Souza · Libre Labs<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">11h00</span>
+              Programar liberta · Blau Araújo · DebXP<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">13h30</span>
+              Software livre e soberania digital na rede federal · Aluizio Neto (IFMG)<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">14h45</span>
+              Redes federadas: além das big techs · Fred Guimarães · Tecnofeudália<br>
+
+              <span style="color:rgba(192,57,43,0.8); font-weight:600;">16h00</span>
+              A conquista do conhecimento com GNU/Linux · Prof. Kretcheu
+            </div>
+
+            <div style="margin-top:0.6rem; font-size:0.72rem; color:rgba(255,255,255,0.3);">
+              📍 UFOP/ICEA · João Monlevade — MG
+            </div>
+
+          </div>
+        </a>
+      </div>
+
+      <!-- FUTUROS -->
+      <div class="reveal reveal-d1">
+        <div class="eventos-col-title">◌ Em breve</div>
+
+        <div class="evento-card futuro" style="margin-bottom:1rem">
+          <div class="evento-data">Em breve · 2026</div>
+
+          <div class="evento-nome">Debian Day 2026</div>
+
+          <div class="evento-desc">
+            Celebração anual do nascimento do Projeto Debian, com instalação,
+            tutoriais e discussões sobre a distribuição GNU/Linux mais influente
+            da história.
+          </div>
+
+          <div class="evento-talks">
+            <span class="evento-talk">Debian GNU/Linux</span>
+            <span class="evento-talk">Empacotamento</span>
+            <span class="evento-talk">Comunidade</span>
+          </div>
+        </div>
+
+        <div class="evento-card futuro">
+          <div class="evento-data">Em breve · 2026</div>
+
+          <div class="evento-nome">DevOps Day</div>
+
+          <div class="evento-desc">
+            Evento com foco em cultura DevOps, ferramentas abertas de CI/CD,
+            containers, automação e infraestrutura como código.
+          </div>
+
+          <div class="evento-talks">
+            <span class="evento-talk">CI/CD</span>
+            <span class="evento-talk">Containers</span>
+            <span class="evento-talk">Linux</span>
+            <span class="evento-talk">Automação</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAÇÃO -->
+  <section id="formacao">
+    <div class="reveal">
+      <div class="section-label">Temas de Formação</div>
+      <h2 class="section-title">O que <em>ensinamos</em></h2>
+    </div>
+
+    <div class="formacao-grid">
+
+      <div class="formacao-item reveal">
+        <div class="formacao-num">01</div>
+
+        <div class="formacao-title">
+          Instalação de Software Livre
+        </div>
+
+        <p class="formacao-desc">
+          Realizamos installfests e acompanhamos participantes na instalação e
+          configuração de distribuições GNU/Linux, ambientes de desenvolvimento,
+          drivers e ferramentas livres no uso cotidiano.
+        </p>
+      </div>
+
+      <div class="formacao-item reveal reveal-d1">
+        <div class="formacao-num">02</div>
+
+        <div class="formacao-title">
+          GNU/Linux e Ecossistema Debian
+        </div>
+
+        <p class="formacao-desc">
+          Introdução ao universo Debian GNU/Linux, gerenciamento de pacotes,
+          terminal, compilação, filosofia do projeto Debian e organização de uma
+          das maiores comunidades de software livre do mundo.
+        </p>
+      </div>
+
+      <div class="formacao-item reveal reveal-d2">
+        <div class="formacao-num">03</div>
+
+        <div class="formacao-title">
+          Redes Federadas e Soberania Digital
+        </div>
+
+        <p class="formacao-desc">
+          Debates sobre descentralização da internet, ActivityPub, Mastodon,
+          Matrix e alternativas abertas às Big Techs, promovendo autonomia
+          tecnológica e privacidade digital.
+        </p>
+      </div>
+
+      <div class="formacao-item reveal">
+        <div class="formacao-num">04</div>
+
+        <div class="formacao-title">
+          Software Livre para Criativos
+        </div>
+
+        <p class="formacao-desc">
+          Apresentamos ferramentas livres voltadas para design, edição de vídeo,
+          modelagem 3D, ilustração e produção multimídia utilizando GIMP,
+          Inkscape, Blender, Krita, Kdenlive e outras soluções abertas.
+        </p>
+      </div>
+
+      <div class="formacao-item reveal reveal-d1">
+        <div class="formacao-num">05</div>
+
+        <div class="formacao-title">
+          Programação, Comunidade e Cultura Open Source
+        </div>
+
+        <p class="formacao-desc">
+          Incentivamos o desenvolvimento colaborativo por meio de Git, GitHub,
+          contribuição em projetos livres, documentação, participação em
+          comunidades e compartilhamento aberto de conhecimento.
+        </p>
+      </div>
+
+      <div class="formacao-item reveal reveal-d2">
+        <div class="formacao-num">06</div>
+
+        <div class="formacao-title">
+          Ética Hacker e Educação Tecnológica Livre
+        </div>
+
+        <p class="formacao-desc">
+          Discussões sobre ética digital, liberdade de software, inclusão
+          tecnológica, educação aberta e o impacto social do movimento do software
+          livre na formação acadêmica e profissional.
+        </p>
+      </div>
+
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer id="contato">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Libre<span>UFOP</span></div>
+        <div class="footer-brand-inst">ICEA · Universidade Federal de Ouro Preto</div>
+        <p class="footer-brand-desc">Projeto de extensão dedicado à promoção do software livre, soberania digital e
+          formação tecnológica no campus de João Monlevade.</p>
+        <div class="social-links" style="margin-top:1.2rem">
+          <a href="#" class="social-btn" aria-label="Mastodon" title="Mastodon">🦣</a>
+          <a href="#" class="social-btn" aria-label="Peertube" title="PeerTube">📺</a>
+          <a href="#" class="social-btn" aria-label="GitHub" title="GitHub">🐙</a>
+          <a href="#" class="social-btn" aria-label="Matrix" title="Matrix">💬</a>
+          <a href="#" class="social-btn" aria-label="Email" title="E-mail">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Navegação</div>
+        <ul>
+          <li><a href="#sobre">Sobre o projeto</a></li>
+          <li><a href="#canais">Canais de conteúdo</a></li>
+          <li><a href="#eventos">Eventos</a></li>
+          <li><a href="#formacao">Formação</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contato</div>
+        <ul>
+          <li><a href="mailto:libreufop@ufop.edu.br">libreufop@ufop.edu.br</a></li>
+          <li><a href="https://ufop.br" target="_blank" rel="noopener">ufop.br</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Feed RSS</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LibreUFOP · Conteúdo licenciado sob <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+          target="_blank">CC BY-SA 4.0</a></p>
+      <div class="ufop-badge">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="8" stroke="#C0392B" stroke-width="1.2" />
+          <path d="M5 9h8M9 5v8" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+        <span><strong>UFOP</strong> · Universidade Federal de Ouro Preto</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
     }
-  });
 
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id], footer[id]');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    // Close mobile menu on resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        document.getElementById('mobileMenu').classList.remove('open');
+      }
     });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--red)' : '';
+
+    // Smooth active nav
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--red)' : '';
+      });
     });
-  });
-</script>
+  </script>
 </body>
+
 </html>
