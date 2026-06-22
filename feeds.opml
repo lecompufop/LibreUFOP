@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>LibreUFOP - Fontes Recomendadas</title>
+    <ownerName>LibreUFOP</ownerName>
+    <ownerEmail>libreufop@ufop.edu.br</ownerEmail>
+    <docs>https://lecompufop.github.io/LibreUFOP/</docs>
+  </head>
+
+  <body>
+
+    <outline text="🇧🇷 Notícias Brasileiras">
+
+      <outline text="BR-Linux"
+               type="rss"
+               xmlUrl="https://br-linux.org/feed"
+               htmlUrl="https://br-linux.org/" />
+
+      <outline text="Viva o Linux"
+               type="rss"
+               xmlUrl="https://www.vivaolinux.com.br/rss"
+               htmlUrl="https://www.vivaolinux.com.br/" />
+
+      <outline text="Diolinux"
+               type="rss"
+               xmlUrl="https://diolinux.com.br/feed"
+               htmlUrl="https://diolinux.com.br/" />
+
+    </outline>
+
+
+    <outline text="🐧 Distribuições GNU/Linux">
+
+      <outline text="Debian News"
+               type="rss"
+               xmlUrl="https://www.debian.org/News/news"
+               htmlUrl="https://www.debian.org/News/" />
+
+      <outline text="Fedora Magazine"
+               type="rss"
+               xmlUrl="https://fedoramagazine.org/feed"
+               htmlUrl="https://fedoramagazine.org/" />
+
+      <outline text="Ubuntu Blog"
+               type="rss"
+               xmlUrl="https://ubuntu.com/blog/feed"
+               htmlUrl="https://ubuntu.com/blog" />
+
+      <outline text="Linux Mint Blog"
+               type="rss"
+               xmlUrl="https://blog.linuxmint.com/?feed=rss2"
+               htmlUrl="https://www.linuxmint.com/" />
+
+      <outline text="BigLinux"
+               type="rss"
+               xmlUrl="https://www.biglinux.com.br/feed"
+               htmlUrl="https://www.biglinux.com.br/" />
+
+      <outline text="openSUSE News"
+               type="rss"
+               xmlUrl="https://news.opensuse.org/feed/"
+               htmlUrl="https://www.opensuse.org/" />
+
+    </outline>
+
+
+    <outline text="🖥️ Ambientes Gráficos">
+
+      <outline text="Planet GNOME"
+               type="rss"
+               xmlUrl="https://planet.gnome.org/rss20.xml"
+               htmlUrl="https://planet.gnome.org/" />
+
+      <outline text="Planet KDE"
+               type="rss"
+               xmlUrl="https://planet.kde.org/rss20.xml"
+               htmlUrl="https://planet.kde.org/" />
+
+      <outline text="MATE Desktop"
+               type="rss"
+               xmlUrl="https://mate-desktop.com/blog/feed"
+               htmlUrl="https://mate-desktop.org/" />
+
+      <outline text="Xfce News"
+               type="rss"
+               xmlUrl="https://xfce.org/feed"
+               htmlUrl="https://xfce.org/" />
+
+    </outline>
+
+
+    <outline text="⌨️ Gerenciadores de Janelas">
+
+      <outline text="i3wm"
+               type="rss"
+               xmlUrl="https://i3wm.org/atom.xml"
+               htmlUrl="https://i3wm.org/" />
+
+      <outline text="Sway"
+               type="rss"
+               xmlUrl="https://github.com/swaywm/sway/releases.atom"
+               htmlUrl="https://swaywm.org/" />
+
+      <outline text="Hyprland"
+               type="rss"
+               xmlUrl="https://github.com/hyprwm/Hyprland/releases.atom"
+               htmlUrl="https://hypr.land/" />
+
+    </outline>
+
+
+    <outline text="💻 Open Source e Tecnologia">
+
+      <outline text="GitHub Blog"
+               type="rss"
+               xmlUrl="https://github.blog/feed"
+               htmlUrl="https://github.blog/" />
+
+      <outline text="The Verge"
+               type="rss"
+               xmlUrl="https://www.theverge.com/rss/index.xml"
+               htmlUrl="https://www.theverge.com/" />
+
+      <outline text="Phoronix"
+               type="rss"
+               xmlUrl="https://www.phoronix.com/rss.php"
+               htmlUrl="https://www.phoronix.com/" />
+
+      <outline text="OMG! Ubuntu"
+               type="rss"
+               xmlUrl="https://www.omgubuntu.co.uk/feed"
+               htmlUrl="https://www.omgubuntu.co.uk/" />
+
+      <outline text="It's FOSS"
+               type="rss"
+               xmlUrl="https://itsfoss.com/feed"
+               htmlUrl="https://itsfoss.com/" />
+
+    </outline>
+
+  </body>
+</opml>
