@@ -1,8 +1,14 @@
-# LibreUFOP
+<div align='center'>
+  <img src="docs/LibreUFOP_logo.jpeg" alt="LibreUFOP" width="200">
+  <br><br>
+  <h1>LibreUFOP</h1>
+</div>
 
 <div align='center'>
 
-  ![LibreUFOP Banner](/docs/LibreUFOP_logo.jpeg)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=gnu)](https://github.com/Naereen/badges/) 
+[![Generic badge](https://badgen.net/badge/Join%20Our%20Community/Telegram/blue?icon=telegram)](https://t.me/libreufop/1)
+[![CC-0 license](https://img.shields.io/badge/License-CC--4.0-blue.svg)](https://creativecommons.org/licenses/by-nd/4.0)
 </div>
 
 <div>
@@ -12,15 +18,6 @@
 </div>
 
 <br>
-
-<div align='center'>
-
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=gnu)](https://github.com/Naereen/badges/) 
-[![Generic badge](https://badgen.net/badge/Join%20Our%20Community/Telegram/blue?icon=telegram)](https://t.me/libreufop/1)[![CC-0 license](https://img.shields.io/badge/License-CC--4.0-blue.svg)](https://creativecommons.org/licenses/by-nd/4.0)
-</div>
-
----
-
 
 ## 📚 Sobre o Projeto
 <div>
@@ -40,7 +37,7 @@
   </p>
 </div>
 
----
+
 <br>
 
 # ✨ Funcionalidades do Site
@@ -82,22 +79,8 @@
 * UI/UX moderna
 * Animações CSS
 
----
 <br>
 
-# 📂 Estrutura do Projeto
-
-```bash
-LibreUFOP/
-│
-├── index.html
-├── styles.css
-├── LibreUFOP_logo.jpg
-└── README.md
-```
-
----
-<br>
 
 # 🚀 Executando Localmente
 
@@ -121,36 +104,7 @@ Basta abrir o arquivo:
 index.html
 ```
 
----
-
-# 🌐 Publicando no GitHub Pages
-
-### 1. Faça push do projeto para seu GitHub
-
-```bash
-git add .
-git commit -m "Primeira versão do site"
-git push origin main
-```
-
-### 2. Ative o GitHub Pages
-
-No GitHub:
-
-* Vá em **Settings**
-* Depois em **Pages**
-* Em **Branch**, selecione:
-
-  * `main`
-  * `/root`
-* Clique em **Save**
-
-Após alguns segundos o site ficará disponível em:
-
-```bash
-https://SEU-USUARIO.github.io/LibreUFOP
-```
----
+<br>
 
 # 🎯 Objetivos do Projeto
 
@@ -161,7 +115,7 @@ https://SEU-USUARIO.github.io/LibreUFOP
 * Fortalecer comunidades abertas
 * Incentivar soberania digital
 
----
+<br>
 
 # 🐧 Temas Estudados
 
@@ -181,7 +135,7 @@ O LibreUFOP trabalha com temas como:
 * Fediverso
 * Software Livre Criativo
 
----
+
 <br>
 
 # 🏛️ Instituição
@@ -193,7 +147,7 @@ Projeto desenvolvido no:
 
 João Monlevade – Minas Gerais
 
----
+
 <br>
 
 # 📄 Licença
@@ -215,7 +169,6 @@ Mais informações:
 https://creativecommons.org/licenses/by-sa/4.0/
 
 
----
 <br>
 
 # 👨‍💻 Autor
