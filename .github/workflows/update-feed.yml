@@ -24,7 +24,7 @@ jobs:
           cache: pip
 
       - name: Instala dependências
-        run: python -m pip install -r requirements.txt
+        run: pip install feedparser requests beautifulsoup4
 
       - name: Gera feed.xml
         run: python generate_feed.py
