@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibreUFOP – Software Livre, Formação e Integração com a Comunidade</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="docs/LibreUFOP_logo.jpeg">
+</head>
+
+<body>
+      <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo">
+        <img src="docs/LibreUFOP_logo.jpeg" alt="Logo LibreUFOP" class="logo-img" />
+        <p>
+          Libre<span>UFOP</span>
+        </p>
+      </div>
+    </a>
+    <ul>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#canais">Canais</a></li>
+      <li><a href="index.html#eventos">Eventos</a></li>
+      <li><a href="index.html#formacao">Formação</a></li>
+      <li><a href="index.html#contato" class="nav-cta">Contato</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#sobre" onclick="toggleMenu()">Sobre</a>
+    <a href="index.html#canais" onclick="toggleMenu()">Canais</a>
+    <a href="index.html#eventos" onclick="toggleMenu()">Eventos</a>
+    <a href="index.html#formacao" onclick="toggleMenu()">Formação</a>
+    <a href="index.html#contato" onclick="toggleMenu()">Contato</a>
+  </div>
+
+  <!-- CONTEUDO -->
+  <section id="oficina-documentos">
+    <div class="documentos-header reveal">
+      <div class="section-label">Oficina LPIC</div>
+      <h1 class="section-title">Materiais para <em>Download</em></h1>
+      <p class="documentos-intro">
+        Acesse os arquivos disponibilizados pelo LibreUFOP para acompanhar as atividades da Oficina LPIC 
+        e consultar os conteúdos do projeto.
+      </p>
+    </div>
+    <div class="documentos-area">
+      <div class="documentos-area-header">
+        <div class="section-label">LPI 101</div>
+        <h2 class="documentos-area-title">Oficina 101</h2>
+      </div>
+        <div class="documentos-grid">
+            <div class="documento-card reveal">
+                <!-- <div class="documento-icon" aria-hidden="true"></div> -->
+                <div>
+                <div class="documento-tipo">Conteúdo da Aula</div>
+                <h2 class="documento-title">Slides</h2>
+                <p class="documento-desc">Apresentações de slides utilizados em sala.</p>
+                </div>
+                <a class="canal-link canal-btn documento-download" href="" download="">
+                Baixar
+                </a>
+            </div>
+    
+            <div class="documento-card reveal reveal-d1">
+                <!-- <div class="documento-icon" aria-hidden="true"></div> -->
+                <div>
+                <div class="documento-tipo">Exercícios</div>
+                <h2 class="documento-title">Listas de Exercícios</h2>
+                <p class="documento-desc">Listas de exercícios colocando a mão na massa e reforçando o aprendizado.</p>
+                </div>
+                <a class="canal-link canal-btn documento-download" href="" download="">
+                Baixar
+                </a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+      <!-- FOOTER -->
+  <footer id="contato">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Libre<span>UFOP</span></div>
+        <div class="footer-brand-inst">ICEA · Universidade Federal de Ouro Preto</div>
+        <p class="footer-brand-desc">Projeto de extensão dedicado à promoção do software livre, soberania digital e
+          formação tecnológica no campus de João Monlevade.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Navegação</div>
+        <ul>
+          <li><a href="index.html#sobre">Sobre o projeto</a></li>
+          <li><a href="index.html#canais">Canais de conteúdo</a></li>
+          <li><a href="index.html#eventos">Eventos</a></li>
+          <li><a href="index.html#formacao">Formação</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contato</div>
+        <ul>
+          <li><a href="mailto:libreufop@ufop.edu.br">libreufop@ufop.edu.br</a></li>
+          <li><a href="https://ufop.br" target="_blank" rel="noopener noreferrer">ufop.br</a></li>
+          <li><a href="index.html#canais">Newsletter</a></li>
+          <li><a href="feed.xml" target="_blank" rel="noopener noreferrer">Feed RSS</a></li>
+          <li><a href="https://github.com/lecompufop/LibreUFOP" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LibreUFOP · Conteúdo licenciado sob <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+          target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></p>
+      <div class="ufop-badge">
+        <img src="docs/ufop-logo.jpg" alt="Logo UFOP" class="ufop-badge-img" />
+        <span><strong>UFOP</strong> · Universidade Federal de Ouro Preto</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(element => observer.observe(element));
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        document.getElementById('mobileMenu').classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

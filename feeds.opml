@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Este arquivo contém uma lista de fontes de notícias, blogs e portais
+   sobre GNU/Linux e Software Livre, organizada pelo LibreUFOP.
+
+   Ele deve ser IMPORTADO em um Leitor de Feeds (Agregador RSS).
+
+   FERRAMENTAS RECOMENDADAS:
+   - Navegador: Extensão FeedBro (Chrome/Firefox/Edge/Brave)
+   - Mobile: Feeder.co
+-->
 <opml version="2.0">
   <head>
     <title>Fontes RSS do Projeto LibreUFOP</title>
-    <dateCreated>Fri, 26 Jun 2026 00:00:00 -0300</dateCreated>
+    <dateCreated>Fri, 02 Oct 2026 00:00:00 -0300</dateCreated>
     <ownerName>LibreUFOP</ownerName>
     <ownerEmail>libreufop@ufop.edu.br</ownerEmail>
     <docs>http://opml.org/spec2.opml</docs>
@@ -154,11 +164,36 @@
                xmlUrl="https://itsfoss.com/feed"
                htmlUrl="https://itsfoss.com/"/>
 
+      <outline text="LWN.net"
+               title="LWN"
+               type="rss"
+               xmlUrl="https://lwn.net/headlines/newrss"
+               htmlUrl="https://lwn.net/"/>
+
+      <outline text="9to5Linux"
+               title="9to5Linux"
+               type="rss"
+               xmlUrl="https://9to5linux.com/feed/"
+               htmlUrl="https://9to5linux.com/"/>
+
+      <outline text="Linux Magazine"
+               title="Linux Magazine"
+               type="rss"
+               xmlUrl="https://www.linux-magazine.com/rss/feed/lmi_news"
+               htmlUrl="https://www.linux-magazine.com/"/>
+
+      <outline text="LinuxLinks"
+               title="LinuxLinks"
+               type="rss"
+               xmlUrl="https://www.linuxlinks.com/feed/"
+               htmlUrl="https://www.linuxlinks.com/"/>
+
       <outline text="Notícias Diversas"
                title="Notícias Diversas"
                type="rss"
                xmlUrl="https://lecompufop.github.io/LibreUFOP/feed.xml"
                htmlUrl="https://lecompufop.github.io/LibreUFOP/"/>
+
     </outline>
 
   </body>

@@ -53,11 +53,26 @@ nav {
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .nav-logo span {
   color: var(--gray-dark);
+}
+
+.nav-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid var(--red);
+  display: block;
+}
+
+.nav-logo::after {
+  display: none !important;
 }
 
 nav ul {
@@ -473,6 +488,7 @@ section {
 .sobre-text p {
   color: var(--gray-mid);
   line-height: 1.8;
+  text-align: justify;
   font-size: 1.05rem;
   margin-bottom: 1.2rem;
 }
@@ -588,6 +604,8 @@ section {
 /* ── CANAIS ── */
 #canais {
   background: var(--white);
+  display: flex;
+  flex-direction: column;
 }
 
 .canais-header {
@@ -597,15 +615,16 @@ section {
 
 .canais-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  max-width: 1100px;
+  max-width:max-content ;
+  text-align: justify;
 }
 
 .canal-card {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  padding: 2rem;
+  padding: 2.5rem;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
@@ -680,6 +699,7 @@ section {
   border: 1px solid rgba(192, 57, 43, 0.28);
   border-radius: 6px;
   padding: 0.55rem 0.95rem;
+  margin: 0.15rem;
   color: var(--red);
   font-weight: 700;
   transition: all 0.25s;
@@ -844,6 +864,12 @@ a.evento-card .evento-nome::after {
   margin-bottom: 0.8rem;
 }
 
+.evento-local{
+  margin-top:0.6rem; 
+  font-size:0.72rem; 
+  color:rgba(255,255,255,0.3);
+}
+
 .evento-talks {
   display: flex;
   flex-wrap: wrap;
@@ -857,6 +883,12 @@ a.evento-card .evento-nome::after {
   color: rgba(255, 255, 255, 0.55);
   padding: 0.2rem 0.6rem;
   border-radius: 100px;
+}
+
+.evento-break{
+  margin-top:0.9rem; 
+  padding-top:0.8rem;
+  border-top:1px solid rgba(255,255,255,0.08); 
 }
 
 /* ── FORMAÇÃO ── */
@@ -1030,7 +1062,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   font-size: 0.78rem;
@@ -1039,6 +1071,152 @@ footer {
 
 .ufop-badge strong {
   color: rgba(255, 255, 255, 0.55);
+}
+
+.ufop-badge img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Oficina.html ── */
+
+/* ── CONTEUDO ── */
+
+#oficina-documentos {
+  min-height: 100svh;
+  padding-top: clamp(7rem, 14vw, 10rem);
+  background: var(--off-white);
+}
+
+.documentos-header {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.documentos-header .section-label {
+  border-left: 0;
+  border-bottom: 3px solid var(--red);
+  padding: 0 0 0.55rem;
+}
+
+.documentos-intro {
+  max-width: 600px;
+  margin: 1.2rem auto 0;
+  color: var(--gray-mid);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.documentos-area {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.documentos-area-header {
+  margin-bottom: 1.5rem;
+}
+
+.documentos-area-header .section-label {
+  margin-bottom: 0.65rem;
+}
+
+.documentos-area-title {
+  color: var(--gray-dark);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.documentos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.documento-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 2.5rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.documento-card::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.documento-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.documento-card:hover::before{
+  transform: scaleX(1);
+}
+
+.documento-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0.4rem;
+  background: rgba(192, 57, 43, 0.1);
+  border-radius: 8px;
+  color: var(--red);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.documento-tipo {
+  margin-bottom: 0.35rem;
+  color: var(--red);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.documento-title {
+  color: var(--gray-dark);
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.documento-desc {
+  margin-top: 0.6rem;
+  color: var(--gray-mid);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.documento-download {
+  align-self: flex-start;
+  margin-top: auto;
+  text-decoration: none;
+}
+
+.documento-download span {
+  font-size: 1.1rem;
+  line-height: 0.8;
 }
 
 /* ── ANIMATIONS ── */
@@ -1195,6 +1373,10 @@ footer {
 }
 
 @media (max-width: 600px) {
+
+  .documentos-grid {
+    grid-template-columns: 1fr;
+  }
 
   /* Hero fine-tuning for small phones */
   #hero {

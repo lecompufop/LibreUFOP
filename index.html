@@ -13,15 +13,14 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="9" stroke="#C0392B" stroke-width="1.5" />
-        <path d="M6 10h8M10 6v8" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" />
-      </svg>
-      <p>
-        Libre<span>UFOP</span>
-      </p>
-    </div>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo">
+        <img src="docs/LibreUFOP_logo.jpeg" alt="Logo LibreUFOP" class="logo-img" />
+        <p>
+          Libre<span>UFOP</span>
+        </p>
+      </div>
+    </a>
     <ul>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#canais">Canais</a></li>
@@ -88,7 +87,8 @@
     <div class="sobre-grid">
       <div class="sobre-text reveal">
         <div class="section-label">Sobre o Projeto</div>
-        <h2 class="section-title" style="margin-bottom:1.5rem">Conhecimento livre <em>para todos</em></h2>
+        <h2 class="section-title">Conhecimento livre <em>para todos</em></h2>
+        <br>
         <p>O <strong>LibreUFOP</strong> é um projeto de extensão da Universidade Federal de Ouro Preto voltado à
           promoção do software livre, da inclusão digital e da formação tecnológica crítica e colaborativa. O projeto
           busca aproximar universidade e comunidade por meio de oficinas, eventos, grupos de estudo e ações
@@ -190,7 +190,8 @@
           depender de algoritmos ou plataformas proprietárias.
         </p>
 
-        <a class="canal-link canal-btn" href="feed.xml">Abrir feed.xml</a>
+        <a class="canal-link canal-btn" href="feed.xml" target="_blank" rel="noopener noreferrer"> Abrir Feed </a>
+        <a class="canal-link canal-btn" href="feeds.opml" download="RSS_LibreUFOP.opml"> Baixar RSS (.opml) </a>
       </div>
 
       <div class="canal-card reveal">
@@ -199,11 +200,11 @@
         <div class="canal-title">Base de Conhecimento Linux</div>
 
         <p class="canal-desc">
-          Também teremos uma base de conhecimento voltada ao universo GNU/Linux, com tutoriais,
-          guias, documentação, dicas práticas e conteúdos para iniciantes e usuários avançados.
+          Acesse nossa base de conhecimento voltada ao universo GNU/Linux. Encontre tutoriais,
+          guias, documentação, dicas práticas, conteúdos para iniciantes e usuários avançados.
         </p>
 
-        <span class="canal-link">Em breve</span>
+        <a class="canal-link canal-btn" href="oficina.html">Oficina LPIC</a>
       </div>
 
     </div>
@@ -223,8 +224,8 @@
         <div class="eventos-col-title">● Realizados</div>
 
         <!-- Debian Day 25 -->
-        <a href="https://wiki.debian.org/DebianDay/2025/Brazil/JoaoMonlevade" target="_blank" rel="noopener"
-          class="evento-card destaque" style="margin-bottom:1rem; display:block;">
+        <a href="https://wiki.debian.org/DebianDay/2025/Brazil/JoaoMonlevade" target="_blank" rel="noopener noreferrer"
+          class="evento-card destaque">
 
           <div class="evento-data">16 de Agosto · 2025 · João Monlevade</div>
 
@@ -243,14 +244,13 @@
             <span class="evento-talk">Projeto Debian</span>
           </div>
 
-          <div style="margin-top:0.9rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.8rem;">
+          <div class="evento-break">
 
-            <div
-              style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:0.5rem;">
+            <div class="evento-data">
               Programação · 16/08/2025 · 8h–13h
             </div>
 
-            <div style="font-size:0.78rem; color:rgba(255,255,255,0.45); line-height:1.8;">
+            <div class="evento-desc">
               <span style="color:rgba(192,57,43,0.8); font-weight:600;">8h</span>
               Abertura e Festival de Instalação<br>
 
@@ -267,7 +267,7 @@
               Encerramento e confraternização
             </div>
 
-            <div style="margin-top:0.6rem; font-size:0.72rem; color:rgba(255,255,255,0.3);">
+            <div class="evento-local">
               📍 UFOP/ICEA · João Monlevade — MG
             </div>
 
@@ -275,7 +275,7 @@
         </a>
 
         <!-- FLISOL -->
-        <a href="https://flisol.info/FLISOL2026/Brasil/JoaoMonlevade" target="_blank" rel="noopener"
+        <a href="https://flisol.info/FLISOL2026/Brasil/JoaoMonlevade" target="_blank" rel="noopener noreferrer"
           class="evento-card destaque" style="display:block;">
 
           <div class="evento-data">25 de Abril · 2026 · João Monlevade</div>
@@ -297,10 +297,9 @@
             <span class="evento-talk">Soberania Digital</span>
           </div>
 
-          <div style="margin-top:0.9rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.8rem;">
+          <div class="evento-break">
 
-            <div
-              style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:0.5rem;">
+            <div class="evento-data">
               Programação · 25/04/2026 · 8h–17h
             </div>
 
@@ -328,7 +327,7 @@
               A conquista do conhecimento com GNU/Linux · Prof. Kretcheu
             </div>
 
-            <div style="margin-top:0.6rem; font-size:0.72rem; color:rgba(255,255,255,0.3);">
+            <div class="evento-local">
               📍 UFOP/ICEA · João Monlevade — MG
             </div>
 
@@ -336,7 +335,7 @@
         </a>
 
         <!-- Debian Day 26 -->
-        <a href="https://wiki.debian.org/DebianDay/2026/Brazil/Jo%C3%A3o%20Monlevade" target="_blank" rel="noopener"
+        <a href="https://wiki.debian.org/DebianDay/2026/Brazil/Jo%C3%A3o%20Monlevade" target="_blank" rel="noopener noreferrer"
           class="evento-card cancelado" style="margin-bottom:1rem; display:block;">
 
           <div class="evento-data">04 de setembro · 2026 · João Monlevade</div>
@@ -362,7 +361,7 @@
         <div class="eventos-col-title">◌ Em breve</div>
 
         <div class="evento-card futuro">
-          <div class="evento-data">Em breve · 2026</div>
+          <div class="evento-data">Em breve · 2027</div>
 
           <div class="evento-nome">DevOps Day</div>
 
@@ -379,6 +378,8 @@
           </div>
         </div>
 
+        <div class="evento-break"></div>
+
       </div>
     </div>
   </section>
@@ -388,7 +389,7 @@
   <div class="reveal">
     <div class="section-label">Temas de Estudo</div>
     <h2 class="section-title">O que <em>estudamos</em></h2>
-
+    <br>
     <p class="section-text">
       No LibreUFOP, estudamos tecnologias livres utilizadas tanto no meio acadêmico quanto em ambientes profissionais modernos. Nossos encontros e oficinas abordam temas técnicos, sociais e colaborativos relacionados ao ecossistema do software livre.
     </p>
@@ -492,21 +493,18 @@
         <div class="footer-col-title">Contato</div>
         <ul>
           <li><a href="mailto:libreufop@ufop.edu.br">libreufop@ufop.edu.br</a></li>
-          <li><a href="https://ufop.br" target="_blank" rel="noopener">ufop.br</a></li>
+          <li><a href="https://ufop.br" target="_blank" rel="noopener noreferrer">ufop.br</a></li>
           <li><a href="#canais">Newsletter</a></li>
-          <li><a href="feed.xml">Feed RSS</a></li>
-          <li><a href="https://github.com/lecompufop/LibreUFOP">GitHub</a></li>
+          <li><a href="feed.xml" target="_blank" rel="noopener noreferrer">Feed RSS</a></li>
+          <li><a href="https://github.com/lecompufop/LibreUFOP" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 LibreUFOP · Conteúdo licenciado sob <a href="https://creativecommons.org/licenses/by-sa/4.0/"
-          target="_blank">CC BY-SA 4.0</a></p>
+          target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></p>
       <div class="ufop-badge">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <circle cx="9" cy="9" r="8" stroke="#C0392B" stroke-width="1.2" />
-          <path d="M5 9h8M9 5v8" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" />
-        </svg>
+        <img src="docs/ufop-logo.jpg" alt="Logo UFOP" class="ufop-badge-img" />
         <span><strong>UFOP</strong> · Universidade Federal de Ouro Preto</span>
       </div>
     </div>

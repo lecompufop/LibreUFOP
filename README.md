@@ -22,7 +22,7 @@
 ## 📚 Sobre o Projeto
 <div>
   <p align='justify'>
-  O **LibreUFOP** é uma iniciativa acadêmica e comunitária criada no campus ICEA da UFOP, em João Monlevade – MG, com foco na disseminação de tecnologias livres e cultura colaborativa.
+  O <b>LibreUFOP</b> é uma iniciativa acadêmica e comunitária criada no campus ICEA da UFOP, em João Monlevade – MG, com foco na disseminação de tecnologias livres e cultura colaborativa.
 
   O projeto promove:
 
@@ -36,7 +36,6 @@
   Mais do que ensinar ferramentas, o LibreUFOP busca fortalecer a autonomia tecnológica e democratizar o acesso ao conhecimento.
   </p>
 </div>
-
 
 <br>
 
@@ -80,7 +79,6 @@
 * Animações CSS
 
 <br>
-
 
 # 🚀 Executando Localmente
 
@@ -135,18 +133,15 @@ O LibreUFOP trabalha com temas como:
 * Fediverso
 * Software Livre Criativo
 
-
 <br>
 
 # 🏛️ Instituição
 
 Projeto desenvolvido no:
 
-**ICEA – Instituto de Ciências Exatas e Aplicadas**
-**Universidade Federal de Ouro Preto (UFOP)**
+<b> Instituto de Ciências Exatas e Aplicadas - ICEA/UFOP </b>
 
 João Monlevade – Minas Gerais
-
 
 <br>
 
@@ -168,13 +163,10 @@ Mais informações:
 
 https://creativecommons.org/licenses/by-sa/4.0/
 
-
 <br>
 
 # 👨‍💻 Autor
 
 Projeto desenvolvido por Vinícius Alochio.
-
-
 
 > “Programar liberta!”
