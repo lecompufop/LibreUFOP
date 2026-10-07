@@ -1124,6 +1124,9 @@ footer {
 }
 
 .documentos-area-title {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
   color: var(--gray-dark);
   font-size: clamp(1.35rem, 3vw, 1.8rem);
   line-height: 1.2;
