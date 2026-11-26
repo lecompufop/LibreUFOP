@@ -1,7 +1,6 @@
-/* ── Oficina.html ── */
+/* ── oficina.html ── */
 
 /* ── CONTEUDO ── */
-
 #oficina-documentos {
   min-height: 100svh;
   padding-top: clamp(7rem, 14vw, 10rem);
@@ -26,6 +25,21 @@
   color: var(--gray-mid);
   line-height: 1.75;
   font-size: 1rem;
+}
+
+.documentos-intro + .documentos-intro {
+  margin-top: 0.75rem;
+}
+
+.documentos-intro a {
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.documentos-intro a:hover {
+  color: var(--red-light);
 }
 
 .documentos-area {
@@ -148,6 +162,21 @@
 .documento-download span {
   font-size: 1.1rem;
   line-height: 0.8;
+}
+
+.ampulheta-flip {
+  display: inline-block;
+  margin-right: 0.25rem;
+  animation: flipHourglass 2s ease-in-out infinite;
+}
+
+@keyframes flipHourglass {
+  0%, 70% { transform: rotate(0deg); }
+  85%, 100% { transform: rotate(180deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ampulheta-flip { animation: none; }
 }
 
 /* Oficina responsive layout */
